@@ -5,6 +5,9 @@ package rocks.zipcode.atm;
  */
 public class ActionResult<T> {
 
+// Generics <T> and <E> takes in whatever data type and changes it to that data type
+    // in the method which its called.
+
     private T data;
     private String errorMessage;
 
