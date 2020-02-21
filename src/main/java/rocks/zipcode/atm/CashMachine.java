@@ -29,6 +29,7 @@ public class CashMachine {
         );
     }
 
+    //float
     public void deposit(int amount) {
         if (accountData != null) {
             tryCall(
@@ -37,7 +38,7 @@ public class CashMachine {
             );
         }
     }
-
+    //float
     public void withdraw(int amount) {
         if (accountData != null) {
             tryCall(
