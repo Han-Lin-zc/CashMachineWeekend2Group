@@ -69,7 +69,6 @@ public class CashMachineApp extends Application {
         field.clear();
         field.setMaxWidth(150.0);
         field.setPromptText("Please enter your ID");
-        TextArea areaInfo = new TextArea();
 
         Button btnSubmit = new Button("Enter Account ID");
         btnSubmit.setOnAction(e -> {
@@ -79,9 +78,11 @@ public class CashMachineApp extends Application {
             this.stage.setScene(new Scene(createContent()));
         });
 
-        FlowPane flowpane = new FlowPane();
+        Button btnCreate = new Button("Create new account");
 
+        FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnSubmit);
+        flowpane.getChildren().add(btnCreate);
         vbox.getChildren().addAll(field, flowpane);
 
         return vbox;
