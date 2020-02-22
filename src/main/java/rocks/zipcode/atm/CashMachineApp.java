@@ -19,6 +19,7 @@ public class CashMachineApp extends Application {
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     Stage stage = new Stage();
+    Stage accntStage = new Stage();
 
     private Parent createContent() {
         VBox vbox = new VBox(10);
@@ -79,6 +80,10 @@ public class CashMachineApp extends Application {
         });
 
         Button btnCreate = new Button("Create new account");
+        btnCreate.setOnAction(event -> {
+            this.accntStage.setScene((new Scene(accntContent())));
+            this.accntStage.show();
+        });
 
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnSubmit);
@@ -86,6 +91,43 @@ public class CashMachineApp extends Application {
         vbox.getChildren().addAll(field, flowpane);
 
         return vbox;
+    }
+
+    public Parent accntContent(){
+        VBox vbox = new VBox(10);
+        vbox.setPrefSize(250, 50);
+
+        Button btnBasic = new Button("Basic");
+        btnBasic.setOnAction(e -> {
+            this.accntStage.setScene(new Scene(accntContent()));
+        });
+
+        Button btnPremium = new Button("Premium");
+        btnBasic.setOnAction(e -> {
+            this.accntStage.setScene(new Scene(accntContent()));
+        });
+
+        Button btnSavings = new Button("Savings");
+        btnBasic.setOnAction(e -> {
+            this.accntStage.setScene(new Scene(accntContent()));
+        });
+
+        Button btnHavak = new Button("Havak");
+        btnBasic.setOnAction(e -> {
+            this.accntStage.setScene(new Scene(accntContent()));
+        });
+
+
+
+        FlowPane flowpane = new FlowPane();
+
+        flowpane.getChildren().add(btnBasic);
+        flowpane.getChildren().add(btnPremium);
+        flowpane.getChildren().add(btnSavings);
+        flowpane.getChildren().add(btnHavak);
+        vbox.getChildren().addAll(flowpane);
+
+        return  vbox;
     }
 
     @Override
