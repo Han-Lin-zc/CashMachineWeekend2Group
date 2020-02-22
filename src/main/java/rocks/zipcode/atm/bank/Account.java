@@ -21,7 +21,9 @@ public abstract class Account {
     //takes in a float for parameter
     public void deposit(float amount) {
         updateBalance(getBalance() + amount);
-    }
+
+        }
+
 
     // cannot withdraw float
     public boolean withdraw(int amount) {
