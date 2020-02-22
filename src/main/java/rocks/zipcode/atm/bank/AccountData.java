@@ -35,9 +35,9 @@ public final class AccountData {
 
     @Override
     public String toString() {
-        return "Account id: " + id + '\n' +
-                "Name: " + name + '\n' +
-                "Email: " + email + '\n' +
-                "Balance: " + balance;
+        String welcomeMessage = name + ", Havak Inc. Welcomes You! :D";
+        String stringBalance = String.format("%1$.2f", balance);
+        return welcomeMessage + '\n' + '\n' +'\n' +
+                "Balance: " + stringBalance;
     }
 }
