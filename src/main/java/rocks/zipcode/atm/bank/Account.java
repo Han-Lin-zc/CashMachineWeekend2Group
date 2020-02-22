@@ -23,8 +23,8 @@ public abstract class Account {
         updateBalance(getBalance() + amount);
     }
 
-    // taking in a float for parameter
-    public boolean withdraw(float amount) {
+    // cannot withdraw float
+    public boolean withdraw(int amount) {
         if (canWithdraw(amount)) {
             updateBalance(getBalance() - amount);
             return true;
@@ -33,8 +33,8 @@ public abstract class Account {
         }
     }
 
-    //float again
-    protected boolean canWithdraw(float amount) {
+    // should not be able to withdraw floats
+    protected boolean canWithdraw(int amount) {
         return getBalance() >= amount;
     }
 
