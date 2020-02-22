@@ -41,11 +41,16 @@ public class Bank {
     }
 
     public ActionResult<AccountData> deposit(AccountData accountData, float amount) {
-        Account account = accounts.get(accountData.getId());
-        account.deposit(amount);
+        if (amount < 0) {
+            return null;
+        }
+            Account account = accounts.get(accountData.getId());
+            account.deposit(amount);
 
-        return ActionResult.success(account.getAccountData());
-    }
+
+            return ActionResult.success(account.getAccountData());
+        }
+
 
     public ActionResult<AccountData> withdraw(AccountData accountData, int amount) {
         Account account = accounts.get(accountData.getId());
