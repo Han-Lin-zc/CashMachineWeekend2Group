@@ -19,18 +19,21 @@ public class CashMachineApp extends Application {
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     Stage stage = new Stage();
-    int id;
 
     private Parent createContent() {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 600);
 
         TextArea areaInfo = new TextArea();
+        TextField cashInput = new TextField();
+        cashInput.setMaxWidth(150.0);
+        cashInput.setPromptText("Enter amount");
+
         areaInfo.setText(cashMachine.toString());
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
-            int amount = Integer.parseInt(field.getText());
+            int amount = Integer.parseInt(cashInput.getText());
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
@@ -38,7 +41,7 @@ public class CashMachineApp extends Application {
 
         Button btnWithdraw = new Button("Withdraw");
         btnWithdraw.setOnAction(e -> {
-            int amount = Integer.parseInt(field.getText());
+            int amount = Integer.parseInt(cashInput.getText());
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
@@ -47,8 +50,7 @@ public class CashMachineApp extends Application {
         Button btnExit = new Button("Exit");
         btnExit.setOnAction(e -> {
             cashMachine.exit();
-
-            areaInfo.setText(cashMachine.toString());
+            this.stage.setScene(new Scene(beforeContent()));
         });
 
         FlowPane flowpane = new FlowPane();
@@ -56,7 +58,7 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        vbox.getChildren().addAll(field, flowpane, areaInfo);
+        vbox.getChildren().addAll(cashInput, areaInfo, flowpane);
         return vbox;
     }
 
@@ -70,8 +72,8 @@ public class CashMachineApp extends Application {
 
         Button btnSubmit = new Button("Enter Account ID");
         btnSubmit.setOnAction(e -> {
-            this.id = Integer.parseInt(field.getText());
-            cashMachine.login(this.id);
+            int id = Integer.parseInt(field.getText());
+            cashMachine.login(id);
 
             this.stage.setScene(new Scene(createContent()));
         });
