@@ -66,6 +66,7 @@ public class CashMachineApp extends Application {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 600);
 
+        field.clear();
         field.setMaxWidth(150.0);
         field.setPromptText("Please enter your ID");
         TextArea areaInfo = new TextArea();
