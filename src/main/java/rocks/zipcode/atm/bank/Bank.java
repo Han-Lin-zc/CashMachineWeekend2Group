@@ -42,7 +42,7 @@ public class Bank {
 
     public ActionResult<AccountData> deposit(AccountData accountData, float amount) {
         if (amount < 0) {
-            return null;
+            return ActionResult.fail("Please enter a positive number");
         }
             Account account = accounts.get(accountData.getId());
             account.deposit(amount);
