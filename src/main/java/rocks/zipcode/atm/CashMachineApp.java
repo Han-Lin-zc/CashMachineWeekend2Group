@@ -25,7 +25,7 @@ public class CashMachineApp extends Application {
 
         TextArea areaInfo = new TextArea();
 
-        Button btnSubmit = new Button("Set Account ID");
+        Button btnSubmit = new Button("Enter Account ID");
         btnSubmit.setOnAction(e -> {
             int id = Integer.parseInt(field.getText());
             cashMachine.login(id);
