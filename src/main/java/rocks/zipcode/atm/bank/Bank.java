@@ -24,6 +24,10 @@ public class Bank {
         accounts.put(3000, new SavingAccount(new AccountData(
                 3000, "Example 3", "example3@gmail.com", 300
         )));
+
+        accounts.put(4000, new HavakAccount(new AccountData(
+                4000, "Example 4", "example4@gmail.com", 400
+        )));
     }
 
     public ActionResult<AccountData> getAccountById(int id) {

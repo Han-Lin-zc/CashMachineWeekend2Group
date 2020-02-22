@@ -16,6 +16,6 @@ public class HavakAccount extends Account {
     }
 
     public float doubleInterestCharge() {
-        return balance = OVERDRAFT_LIMIT * 2;
+        return balance = OVERDRAFT_LIMIT *  -2;
     }
 }
