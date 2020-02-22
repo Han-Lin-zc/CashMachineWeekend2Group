@@ -19,23 +19,14 @@ public class CashMachineApp extends Application {
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     Stage stage = new Stage();
+    int id;
 
     private Parent createContent() {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 600);
 
-        field.setMaxWidth(150.0);
-        field.setPromptText("Please enter your ID");
-
         TextArea areaInfo = new TextArea();
-
-        Button btnSubmit = new Button("Enter Account ID");
-        btnSubmit.setOnAction(e -> {
-            int id = Integer.parseInt(field.getText());
-            cashMachine.login(id);
-
-            areaInfo.setText(cashMachine.toString());
-        });
+        areaInfo.setText(cashMachine.toString());
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
@@ -62,7 +53,6 @@ public class CashMachineApp extends Application {
 
         FlowPane flowpane = new FlowPane();
 
-        flowpane.getChildren().add(btnSubmit);
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
@@ -80,11 +70,10 @@ public class CashMachineApp extends Application {
 
         Button btnSubmit = new Button("Enter Account ID");
         btnSubmit.setOnAction(e -> {
-            int id = Integer.parseInt(field.getText());
-            cashMachine.login(id);
+            this.id = Integer.parseInt(field.getText());
+            cashMachine.login(this.id);
 
             this.stage.setScene(new Scene(createContent()));
-            areaInfo.setText(cashMachine.toString());
         });
 
         FlowPane flowpane = new FlowPane();
