@@ -19,6 +19,7 @@ public class CashMachineApp extends Application {
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     Stage stage = new Stage();
+    Stage accntStage = new Stage();
 
     private Parent createContent() {
         VBox vbox = new VBox(10);
@@ -79,6 +80,14 @@ public class CashMachineApp extends Application {
         });
 
         Button btnCreate = new Button("Create new account");
+        btnCreate.setOnAction(event -> {
+
+        });
+
+        public Parent accntContent(){
+            
+        }
+
 
         FlowPane flowpane = new FlowPane();
         flowpane.getChildren().add(btnSubmit);
