@@ -74,6 +74,6 @@ public class CashMachine {
         }
     }
     public AccountData getAccountData(){
-        return accountData;
+        return this.accountData;
     }
 }
