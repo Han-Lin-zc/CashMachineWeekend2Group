@@ -2,19 +2,30 @@ package rocks.zipcode.atm.bank;
 
 public class SavingAccount extends Account {
 
-    private double annualInterestRate;
-    private double monthlyInterestRate;
-    private double totalInterest;
+    private double annualInterestRate = .02;
+
+    //startBalance = account balance;
 
     public SavingAccount(AccountData accountData) {
         super(accountData);
     }
 
-    public void setAnnualInterestRate (double annualInterestRate) {
-        monthlyInterestRate = annualInterestRate / 12;
+    //start balance
+    public float getBalance() {
+        return getBalance();
     }
 
-    public void calculateMonthlyInterest() {
-        totalInterest = totalInterest + getBalance() * monthlyInterestRate;
+
+
+    //adds the amount to the balance. Calculates total deposit amount
+    public float calculateAnnualInterestRate() {
+      float interestGained = (float) (getBalance() * annualInterestRate);
+      return interestGained;
     }
+    public void addInterestGainedToBalance() {
+
+        deposit(calculateAnnualInterestRate());
+
+    }
+
 }
