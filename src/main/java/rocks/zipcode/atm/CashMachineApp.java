@@ -18,10 +18,14 @@ public class CashMachineApp extends Application {
 
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
+    Stage stage = new Stage();
 
     private Parent createContent() {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 600);
+
+        field.setMaxWidth(150.0);
+        field.setPromptText("Please enter your ID");
 
         TextArea areaInfo = new TextArea();
 
@@ -66,10 +70,36 @@ public class CashMachineApp extends Application {
         return vbox;
     }
 
+    public Parent beforeContent(){
+        VBox vbox = new VBox(10);
+        vbox.setPrefSize(600, 600);
+
+        field.setMaxWidth(150.0);
+        field.setPromptText("Please enter your ID");
+        TextArea areaInfo = new TextArea();
+
+        Button btnSubmit = new Button("Enter Account ID");
+        btnSubmit.setOnAction(e -> {
+            int id = Integer.parseInt(field.getText());
+            cashMachine.login(id);
+
+            this.stage.setScene(new Scene(createContent()));
+            areaInfo.setText(cashMachine.toString());
+        });
+
+        FlowPane flowpane = new FlowPane();
+
+        flowpane.getChildren().add(btnSubmit);
+        vbox.getChildren().addAll(field, flowpane);
+
+        return vbox;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(createContent()));
-        stage.show();
+        this.stage = stage;
+        this.stage.setScene(new Scene(beforeContent()));
+        this.stage.show();
     }
 
     public static void main(String[] args) {
