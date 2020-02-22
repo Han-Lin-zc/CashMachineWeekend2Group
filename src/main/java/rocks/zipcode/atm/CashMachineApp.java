@@ -47,7 +47,7 @@ public class CashMachineApp extends Application {
             areaInfo.setText(cashMachine.toString());
         });
 
-        Button btnExit = new Button("Exit");
+        Button btnExit = new Button("Log out");
         btnExit.setOnAction(e -> {
             cashMachine.exit();
             this.stage.setScene(new Scene(beforeContent()));
@@ -70,7 +70,7 @@ public class CashMachineApp extends Application {
         field.setMaxWidth(150.0);
         field.setPromptText("Please enter your ID");
 
-        Button btnSubmit = new Button("Enter Account ID");
+        Button btnSubmit = new Button("Log in");
         btnSubmit.setOnAction(e -> {
             int id = Integer.parseInt(field.getText());
             cashMachine.login(id);
