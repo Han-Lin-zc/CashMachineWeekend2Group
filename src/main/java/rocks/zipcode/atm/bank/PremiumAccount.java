@@ -12,7 +12,7 @@ public class PremiumAccount extends Account {
     }
 
     @Override
-    protected boolean canWithdraw(float amount) {
+    protected boolean canWithdraw(int amount) {
         return getBalance() + OVERDRAFT_LIMIT >= amount;
     }
 }
