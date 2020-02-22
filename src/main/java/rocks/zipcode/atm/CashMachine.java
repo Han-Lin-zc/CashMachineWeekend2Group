@@ -73,4 +73,7 @@ public class CashMachine {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    public AccountData getAccountData(){
+        return accountData;
+    }
 }
