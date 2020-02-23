@@ -6,11 +6,16 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -71,7 +76,10 @@ public class CashMachineApp extends Application {
 
     public Parent beforeContent(){
         StackPane root = new StackPane(menuBar);
-
+        Text title = new Text();
+        title.setText("Havak Bank");
+        title.setFont(Font.font("Helvatica", 20));
+        title.setTextAlignment(TextAlignment.CENTER);
         field.clear();
         field.setMaxWidth(150.0);
         field.setPromptText("Please enter your ID");
@@ -95,8 +103,9 @@ public class CashMachineApp extends Application {
         field.setTranslateY(-55);
         btnSubmit.setTranslateY(-26);
         btnCreate.setTranslateY(2);
+        title.setTranslateY(-100);
 
-        root.getChildren().addAll(field, btnSubmit,btnCreate);
+        root.getChildren().addAll(field, btnSubmit,btnCreate,title);
 
         return root;
     }
