@@ -35,30 +35,39 @@ public class CashMachineApp extends Application {
     Stage accntStage = new Stage();
 
     private Parent createContent() {
-        VBox vbox = new VBox(10);
+        VBox vbox = new VBox(15);
         vbox.setPrefSize(600, 600);
-
         Text areaInfo = new Text();
         TextField cashInput = new TextField();
-        cashInput.setMaxWidth(150.0);
+        cashInput.setMaxWidth(200);
         cashInput.setPromptText("Enter amount");
+        Text errorInfo = new Text();
+        errorInfo.setFont(Font.font("Helvatica", 12));
+        errorInfo.setFill(Color.RED);
 
         areaInfo.setText(cashMachine.toString());
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
-            int amount = Integer.parseInt(cashInput.getText());
+            float amount = Float.parseFloat(cashInput.getText());
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
+            errorInfo.setText(cashMachine.getErrorMessage());
         });
 
         Button btnWithdraw = new Button("Withdraw");
         btnWithdraw.setOnAction(e -> {
+
             int amount = Integer.parseInt(cashInput.getText());
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
+            if(cashMachine.getAccountData().getBalance() < 0){
+                errorInfo.setText("You have over drafted " + cashMachine.getAccountData().getBalance());
+            }else {
+                errorInfo.setText(cashMachine.getErrorMessage());
+            }
         });
 
         Button btnExit = new Button("Log out");
@@ -69,10 +78,12 @@ public class CashMachineApp extends Application {
 
         FlowPane flowpane = new FlowPane();
 
+
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        vbox.getChildren().addAll(cashInput, areaInfo, flowpane);
+        btnExit.setLayoutY(400);
+        vbox.getChildren().addAll(areaInfo, cashInput, flowpane, errorInfo);
         return vbox;
     }
 

@@ -15,19 +15,19 @@ public class Bank {
 
     public Bank() {
         accounts.put(1000, new BasicAccount(new AccountData(
-                1000, "Basic", "basic@gmail.com", 500
+                1000, "Basic", "basic@gmail.com", 500, "Basic"
         )));
 
         accounts.put(2000, new PremiumAccount(new AccountData(
-                2000, "Premium", "premium@gmail.com", 200
+                2000, "Premium", "premium@gmail.com", 200, "Premium"
         )));
 
         accounts.put(3000, new SavingAccount(new AccountData(
-                3000, "Saving", "saving@gmail.com", 300
+                3000, "Saving", "saving@gmail.com", 300, "Saving"
         )));
 
         accounts.put(4000, new HavakAccount(new AccountData(
-                4000, "Havak", "havak@gmail.com", 400
+                4000, "Havak", "havak@gmail.com", 400, "havak"
         )));
     }
 
@@ -59,7 +59,8 @@ public class Bank {
         if (ok) {
             return ActionResult.success(account.getAccountData());
         } else {
-            return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
+            String balance = String.format("%1$.2f", account.getBalance());
+            return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + balance);
         }
     }
 
@@ -82,19 +83,19 @@ public class Bank {
 
         if(accountType.equalsIgnoreCase("Basic")){
             accounts.put(newId, new BasicAccount(new AccountData(
-                    newId, name, email, deposit
+                    newId, name, email, deposit, accountType
             )));
         } else if (accountType.equalsIgnoreCase("Premium")){
             accounts.put(newId, new PremiumAccount(new AccountData(
-                    newId, name, email, deposit
+                    newId, name, email, deposit, accountType
             )));
         } else if(accountType.equalsIgnoreCase("Savings")){
             accounts.put(newId, new SavingAccount(new AccountData(
-                    newId, name, email, deposit
+                    newId, name, email, deposit, accountType
             )));
         } else {
             accounts.put(newId, new HavakAccount(new AccountData(
-                    newId, name, email, deposit
+                    newId, name, email, deposit, accountType
             )));
         }
     }
