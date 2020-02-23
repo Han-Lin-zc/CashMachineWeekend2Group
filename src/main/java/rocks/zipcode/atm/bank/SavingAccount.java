@@ -8,13 +8,6 @@ public class SavingAccount extends Account {
         super(accountData);
     }
 
-    //start balance
-    public float getBalance() {
-        return getBalance();
-    }
-
-
-
     //adds the amount to the balance. Calculates total deposit amount
     public float calculateAnnualInterestRate() {
       float interestGained = (float) (getBalance() * annualInterestRate);
