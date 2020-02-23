@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import rocks.zipcode.atm.bank.AccountData;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -26,7 +27,11 @@ public class CashMachineApp extends Application {
 
     private MenuBar menuBar = new MenuBar();
     private TextField field = new TextField();
+    private TextField nameField = new TextField();
+    private TextField emailField = new TextField();
+    private TextField depositField = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
+
     Stage stage = new Stage();
     Stage accntStage = new Stage();
 
@@ -111,57 +116,65 @@ public class CashMachineApp extends Application {
     }
 
     public Parent accntContent(){
-        StackPane root = new StackPane(menuBar);
+        StackPane root = new StackPane();
 
-        Menu menu1 = new Menu("File");
-        Menu menu2 = new Menu("Account");
-        MenuItem createAccount = new MenuItem("Create Account");
-        MenuItem exitApp = new MenuItem("Exit");
-        menu1.getItems().add(exitApp);
-        menu2.getItems().add(createAccount);
-        menuBar.getMenus().addAll(menu1,menu2);
+        Text title = new Text();
+        title.setText("Create Account");
+        title.setFont(Font.font("Helvatica", 20));
+        title.setTextAlignment(TextAlignment.CENTER);
 
-        Cursor.cursor("CLOSED_HAND");
 
-        exitApp.setOnAction(event -> {
-            accntStage.close();
+        nameField.clear();
+        nameField.setMaxWidth(155.0);
+        nameField.setPromptText("Please enter your name");
+
+        emailField.clear();
+        emailField.setMaxWidth(155.0);
+        emailField.setPromptText("Please enter your email");
+
+        depositField.clear();
+        depositField.setMaxWidth(155.0);
+        depositField.setPromptText("Please enter your deposit");
+
+        ComboBox comboBox = new ComboBox();
+
+        comboBox.getItems().add("Basic");
+        comboBox.getItems().add("Premium");
+        comboBox.getItems().add("Savings");
+        comboBox.getItems().add("Havak");
+
+        comboBox.setMaxWidth(155.0);
+
+
+//SUBMIT NEW ACCOUNT
+        Button btnSubmit = new Button("Submit");
+        btnSubmit.setOnAction(e -> {
+            int deposit = Integer.parseInt(depositField.getText());
+            String name = nameField.getText();
+            String email = emailField.getText();
+            String accountType = (String) comboBox.getValue();
+
+
+//Need to create logic to make sure we get the info we need to create new account
+
+            cashMachine.getBank().addAccount(name,email,deposit,accountType);
+
+            depositField.clear();
+            nameField.clear();
+            emailField.clear();
         });
 
-//        Need to figure out how to set background image;
-//        BackgroundImage myBI = new BackgroundImage(new Image("icon_pattern.png",300,300,true,true),
-//                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
-//                root.setBackground(new Background(myBI));
+//Styling for buttons
+        title.setTranslateY(-100);
+        nameField.setTranslateY(-65);
+        emailField.setTranslateY(-35);
+        depositField.setTranslateY(-5);
+        comboBox.setTranslateY(25);
+        btnSubmit.setTranslateY(55);
 
 
-        Button btnBasic = new Button("Basic");
-        btnBasic.setOnAction(e -> {
-        //add action here
-        });
+        root.getChildren().addAll(nameField,emailField,depositField,title,btnSubmit,comboBox);
 
-        Button btnPremium = new Button("Premium");
-        btnBasic.setOnAction(e -> {
-        //add action here
-        });
-
-        Button btnSavings = new Button("Savings");
-        btnBasic.setOnAction(e -> {
-        //add action here
-        });
-
-        Button btnHavak = new Button("Havak");
-        btnBasic.setOnAction(e -> {
-        //add action here
-        });
-
-
-        btnBasic.setTranslateX(-92);
-        btnPremium.setTranslateX(-35);
-        btnSavings.setTranslateX(30);
-        btnHavak.setTranslateX(87);
-
-        root.getChildren().addAll(btnBasic,btnPremium,btnSavings,btnHavak);
-
-        StackPane.setAlignment(menuBar,Pos.TOP_CENTER);
         return root;
     }
 
