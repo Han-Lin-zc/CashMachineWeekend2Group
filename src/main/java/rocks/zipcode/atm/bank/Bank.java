@@ -11,6 +11,7 @@ import java.util.Map;
 public class Bank {
 
     private Map<Integer, Account> accounts = new HashMap<>();
+    private int id = 1000;
 
     public Bank() {
         accounts.put(1000, new BasicAccount(new AccountData(
@@ -28,6 +29,22 @@ public class Bank {
         accounts.put(4000, new HavakAccount(new AccountData(
                 4000, "Havak", "havak@gmail.com", 400
         )));
+    }
+
+    public void addNewAccount(String name, String email, float initialDeposit, String accountType){
+        if(accountType.toLowerCase().equals("basic")){
+            accounts.put(this.id, new BasicAccount(new AccountData(this.id, name, email, initialDeposit)));
+            this.id++;
+        }else if(accountType.toLowerCase().equals("premium")){
+            accounts.put(this.id, new PremiumAccount(new AccountData(this.id, name, email, initialDeposit)));
+            this.id++;
+        }else if(accountType.toLowerCase().equals("savings")){
+            accounts.put(this.id, new SavingAccount(new AccountData(this.id, name, email, initialDeposit)));
+            this.id++;
+        }else if(accountType.toLowerCase().equals("havak")){
+            accounts.put(this.id, new HavakAccount(new AccountData(this.id, name, email, initialDeposit)));
+            this.id++;
+        }
     }
 
     public ActionResult<AccountData> getAccountById(int id) {
@@ -50,7 +67,6 @@ public class Bank {
 
             return ActionResult.success(account.getAccountData());
         }
-
 
     public ActionResult<AccountData> withdraw(AccountData accountData, int amount) {
         Account account = accounts.get(accountData.getId());

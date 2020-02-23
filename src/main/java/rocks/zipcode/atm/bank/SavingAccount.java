@@ -4,8 +4,6 @@ public class SavingAccount extends Account {
 
     private double annualInterestRate = .02;
 
-    //startBalance = account balance;
-
     public SavingAccount(AccountData accountData) {
         super(accountData);
     }
@@ -22,6 +20,7 @@ public class SavingAccount extends Account {
       float interestGained = (float) (getBalance() * annualInterestRate);
       return interestGained;
     }
+
     public void addInterestGainedToBalance() {
 
         deposit(calculateAnnualInterestRate());
