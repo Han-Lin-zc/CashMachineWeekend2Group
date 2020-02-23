@@ -25,7 +25,6 @@ import java.io.FileNotFoundException;
  */
 public class CashMachineApp extends Application {
 
-    private MenuBar menuBar = new MenuBar();
     private TextField field = new TextField();
     private TextField nameField = new TextField();
     private TextField emailField = new TextField();
@@ -80,7 +79,7 @@ public class CashMachineApp extends Application {
     }
 
     public Parent beforeContent(){
-        StackPane root = new StackPane(menuBar);
+        StackPane root = new StackPane();
         Text title = new Text();
         title.setText("Havak Bank");
         title.setFont(Font.font("Helvatica", 20));
@@ -124,6 +123,7 @@ public class CashMachineApp extends Application {
         title.setTextAlignment(TextAlignment.CENTER);
 
 
+
         nameField.clear();
         nameField.setMaxWidth(155.0);
         nameField.setPromptText("Please enter your name");
@@ -146,23 +146,47 @@ public class CashMachineApp extends Application {
         comboBox.setMaxWidth(155.0);
 
 
+        //Error Message
+        Text errorInfo = new Text();
+
+        errorInfo.setFont(Font.font("Helvatica", 12));
+        errorInfo.setFill(Color.RED);
+
+
+
+
 //SUBMIT NEW ACCOUNT
         Button btnSubmit = new Button("Submit");
         btnSubmit.setOnAction(e -> {
-            int deposit = Integer.parseInt(depositField.getText());
+            int deposit = 0;
+            if(depositField.getText().isEmpty()){
+                errorInfo.setText("ERROR: Please enter a number to deposit!");
+            } else if(!numberOrNot()){
+                errorInfo.setText("ERROR: Please enter an actual number!");
+            } else { deposit = Integer.parseInt(depositField.getText());
+            }
+
             String name = nameField.getText();
             String email = emailField.getText();
             String accountType = (String) comboBox.getValue();
 
-
-//Need to create logic to make sure we get the info we need to create new account
-
-            cashMachine.getBank().addAccount(name,email,deposit,accountType);
-
-            depositField.clear();
-            nameField.clear();
-            emailField.clear();
+            if( name.isEmpty()){
+                errorInfo.setText("ERROR: Please enter a name!");
+            } else if(email.isEmpty()){
+                errorInfo.setText("ERROR: Please enter an email!");
+            } else if (deposit < 200){
+                errorInfo.setText("ERROR: Please deposit an amount over $200!");
+            } else if (accountType == null || accountType == ""){
+                errorInfo.setText("ERROR: Please select an account type!");
+            }  else {
+                cashMachine.getBank().addAccount(name,email,deposit,accountType);
+                depositField.clear();
+                nameField.clear();
+                emailField.clear();
+                errorInfo.setText("");
+            }
         });
+
 
 //Styling for buttons
         title.setTranslateY(-100);
@@ -171,11 +195,25 @@ public class CashMachineApp extends Application {
         depositField.setTranslateY(-5);
         comboBox.setTranslateY(25);
         btnSubmit.setTranslateY(55);
+        errorInfo.setTranslateY(80);
 
 
-        root.getChildren().addAll(nameField,emailField,depositField,title,btnSubmit,comboBox);
+        root.getChildren().addAll(nameField,emailField,depositField,title,btnSubmit,comboBox,errorInfo);
 
         return root;
+    }
+
+    boolean numberOrNot()
+    {
+        try
+        {
+            Integer.parseInt(depositField.getText());
+        }
+        catch(NumberFormatException ex)
+        {
+            return false;
+        }
+        return true;
     }
 
     @Override
