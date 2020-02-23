@@ -1,21 +1,26 @@
 package rocks.zipcode.atm;
 
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.FlowPane;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * @author ZipCodeWilmington
  */
 public class CashMachineApp extends Application {
 
+    private MenuBar menuBar = new MenuBar();
     private TextField field = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
     Stage stage = new Stage();
@@ -24,6 +29,8 @@ public class CashMachineApp extends Application {
     private Parent createContent() {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 600);
+
+
 
         TextArea areaInfo = new TextArea();
         TextField cashInput = new TextField();
@@ -64,8 +71,8 @@ public class CashMachineApp extends Application {
     }
 
     public Parent beforeContent(){
-        VBox vbox = new VBox(10);
-        vbox.setPrefSize(600, 600);
+        VBox vbox = new VBox(menuBar);
+        vbox.setPrefSize(300, 250);
 
         field.clear();
         field.setMaxWidth(150.0);
@@ -81,7 +88,7 @@ public class CashMachineApp extends Application {
 
         Button btnCreate = new Button("Create new account");
         btnCreate.setOnAction(event -> {
-            this.accntStage.setScene((new Scene(accntContent())));
+            this.accntStage.setScene((new Scene(accntContent(), 300,250)));
             this.accntStage.show();
         });
 
@@ -94,40 +101,54 @@ public class CashMachineApp extends Application {
     }
 
     public Parent accntContent(){
-        VBox vbox = new VBox(10);
-        vbox.setPrefSize(250, 50);
+        StackPane root = new StackPane(menuBar);
+
+        Menu menu1 = new Menu("File");
+        Menu menu2 = new Menu("Account");
+        MenuItem createAccount = new MenuItem("Create Account");
+        MenuItem exitApp = new MenuItem("Exit");
+        menu1.getItems().add(exitApp);
+        menu2.getItems().add(createAccount);
+        menuBar.getMenus().addAll(menu1,menu2);
+
+        Cursor.cursor("CLOSED_HAND");
+
 
         Button btnBasic = new Button("Basic");
         btnBasic.setOnAction(e -> {
-            this.accntStage.setScene(new Scene(accntContent()));
+//            this.accntStage.setScene(new Scene(accntContent()));
         });
 
         Button btnPremium = new Button("Premium");
         btnBasic.setOnAction(e -> {
-            this.accntStage.setScene(new Scene(accntContent()));
+//            this.accntStage.setScene(new Scene(accntContent()));
         });
 
         Button btnSavings = new Button("Savings");
         btnBasic.setOnAction(e -> {
-            this.accntStage.setScene(new Scene(accntContent()));
+//            this.accntStage.setScene(new Scene(accntContent()));
         });
 
         Button btnHavak = new Button("Havak");
         btnBasic.setOnAction(e -> {
-            this.accntStage.setScene(new Scene(accntContent()));
+//            this.accntStage.setScene(new Scene(accntContent()));
         });
 
 
 
-        FlowPane flowpane = new FlowPane();
+        btnBasic.setTranslateX(-92);
+        btnPremium.setTranslateX(-35);
+        btnSavings.setTranslateX(30);
+        btnHavak.setTranslateX(87);
+//Need to figure out how to set background image;
+//        BackgroundImage myBI = new BackgroundImage(new Image("icon_pattern.png",300,300,true,true),
+//                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
+//
+//        root.getChildren().addAll(btnBasic,btnPremium,btnSavings,btnHavak);
+//        root.setBackground(new Background(myBI));
 
-        flowpane.getChildren().add(btnBasic);
-        flowpane.getChildren().add(btnPremium);
-        flowpane.getChildren().add(btnSavings);
-        flowpane.getChildren().add(btnHavak);
-        vbox.getChildren().addAll(flowpane);
-
-        return  vbox;
+        StackPane.setAlignment(menuBar,Pos.TOP_CENTER);
+        return root;
     }
 
     @Override
