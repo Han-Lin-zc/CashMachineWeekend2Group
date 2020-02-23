@@ -9,7 +9,7 @@ public class AccountDataTest {
 
     @Test
     public void getId() {
-        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500);
+        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         int expected = 1000;
         int actual = accData.getId();
         Assert.assertEquals(expected,actual);
@@ -17,7 +17,7 @@ public class AccountDataTest {
 
     @Test
     public void getName() {
-        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500);
+        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         String expected = "Basic";
         String actual = accData.getName();
         Assert.assertEquals(expected,actual);
@@ -25,7 +25,7 @@ public class AccountDataTest {
 
     @Test
     public void getEmail() {
-        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500);
+        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         String expected = "basic@gmail.com";
         String actual = accData.getEmail();
         Assert.assertEquals(expected,actual);
@@ -33,7 +33,7 @@ public class AccountDataTest {
 
     @Test
     public void getBalance() {
-        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500);
+        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         float expected = 500;
         float actual = accData.getBalance();
         Assert.assertEquals(expected,actual);
@@ -41,7 +41,7 @@ public class AccountDataTest {
 
     @Test
     public void testToString() {
-        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500);
+        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         String name = accData.getName();
         float balance = accData.getBalance();
         String expected = name + ", Havak Inc. Welcomes You! :D" + '\n' + '\n' + '\n' + "Balance: " + balance;
