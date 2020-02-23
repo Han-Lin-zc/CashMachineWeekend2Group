@@ -11,7 +11,6 @@ import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -58,7 +57,7 @@ public class CashMachineApp extends Application {
         Button btnExit = new Button("Log out");
         btnExit.setOnAction(e -> {
             cashMachine.exit();
-            this.stage.setScene(new Scene(beforeContent()));
+            this.stage.setScene(new Scene(beforeContent(),300,300));
         });
 
         FlowPane flowpane = new FlowPane();
@@ -71,8 +70,7 @@ public class CashMachineApp extends Application {
     }
 
     public Parent beforeContent(){
-        VBox vbox = new VBox(menuBar);
-        vbox.setPrefSize(300, 250);
+        StackPane root = new StackPane(menuBar);
 
         field.clear();
         field.setMaxWidth(150.0);
@@ -88,16 +86,19 @@ public class CashMachineApp extends Application {
 
         Button btnCreate = new Button("Create new account");
         btnCreate.setOnAction(event -> {
-            this.accntStage.setScene((new Scene(accntContent(), 300,250)));
+            this.accntStage.setScene((new Scene(accntContent(), 300,300)));
             this.accntStage.show();
         });
 
-        FlowPane flowpane = new FlowPane();
-        flowpane.getChildren().add(btnSubmit);
-        flowpane.getChildren().add(btnCreate);
-        vbox.getChildren().addAll(field, flowpane);
+        btnSubmit.setMaxWidth(150.0);
+        btnCreate.setMaxWidth(150.0);
+        field.setTranslateY(-55);
+        btnSubmit.setTranslateY(-26);
+        btnCreate.setTranslateY(2);
 
-        return vbox;
+        root.getChildren().addAll(field, btnSubmit,btnCreate);
+
+        return root;
     }
 
     public Parent accntContent(){
@@ -113,39 +114,43 @@ public class CashMachineApp extends Application {
 
         Cursor.cursor("CLOSED_HAND");
 
+        exitApp.setOnAction(event -> {
+            accntStage.close();
+        });
+
+//        Need to figure out how to set background image;
+//        BackgroundImage myBI = new BackgroundImage(new Image("icon_pattern.png",300,300,true,true),
+//                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
+//                root.setBackground(new Background(myBI));
+
 
         Button btnBasic = new Button("Basic");
         btnBasic.setOnAction(e -> {
-//            this.accntStage.setScene(new Scene(accntContent()));
+        //add action here
         });
 
         Button btnPremium = new Button("Premium");
         btnBasic.setOnAction(e -> {
-//            this.accntStage.setScene(new Scene(accntContent()));
+        //add action here
         });
 
         Button btnSavings = new Button("Savings");
         btnBasic.setOnAction(e -> {
-//            this.accntStage.setScene(new Scene(accntContent()));
+        //add action here
         });
 
         Button btnHavak = new Button("Havak");
         btnBasic.setOnAction(e -> {
-//            this.accntStage.setScene(new Scene(accntContent()));
+        //add action here
         });
-
 
 
         btnBasic.setTranslateX(-92);
         btnPremium.setTranslateX(-35);
         btnSavings.setTranslateX(30);
         btnHavak.setTranslateX(87);
-//Need to figure out how to set background image;
-//        BackgroundImage myBI = new BackgroundImage(new Image("icon_pattern.png",300,300,true,true),
-//                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
-//
-//        root.getChildren().addAll(btnBasic,btnPremium,btnSavings,btnHavak);
-//        root.setBackground(new Background(myBI));
+
+        root.getChildren().addAll(btnBasic,btnPremium,btnSavings,btnHavak);
 
         StackPane.setAlignment(menuBar,Pos.TOP_CENTER);
         return root;
@@ -154,7 +159,7 @@ public class CashMachineApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        this.stage.setScene(new Scene(beforeContent()));
+        this.stage.setScene(new Scene(beforeContent(),300,300));
         this.stage.show();
     }
 
