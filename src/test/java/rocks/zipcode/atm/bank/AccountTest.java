@@ -9,7 +9,7 @@ public class AccountTest {
 
     @Test
     public void getAccountData() {
-        AccountData expected = new AccountData(1000, "Basic", "basic@gmail.com", 500);
+        AccountData expected = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         Account acc = new BasicAccount(expected);
         Assert.assertEquals(expected, acc.getAccountData());
 
@@ -29,7 +29,7 @@ public class AccountTest {
 
     @Test
     public void getBalance() {
-        AccountData expected = new AccountData(1000, "Basic", "basic@gmail.com", 500);
+        AccountData expected = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         Account acc = new BasicAccount(expected);
         Assert.assertEquals(expected,acc.getBalance());
     }
