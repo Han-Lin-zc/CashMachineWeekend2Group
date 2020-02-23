@@ -64,33 +64,38 @@ public class Bank {
         }
     }
 
-    private static int getRandomNumberInRange(int min, int max) {
-        Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
+    public int getNewId() {
+        return accounts.size()+1000;
+    }
+
+    public boolean checkId(int idToCheck){
+        for (int key : accounts.keySet()) {
+            if(key == idToCheck){
+                return false;
+            }
+        }
+        return true;
     }
 
 
-    public void addAccount(String name, String email, int deposit, String accountType){
-
-        int generateId = getRandomNumberInRange(1000,8000);
-
+    public void addAccount(String name, String email, int deposit, String accountType,int newId){
 //Need to create logic to check for duplicate IDs
 
         if(accountType.equalsIgnoreCase("Basic")){
-            accounts.put(generateId, new BasicAccount(new AccountData(
-                    generateId, name, email, deposit
+            accounts.put(newId, new BasicAccount(new AccountData(
+                    newId, name, email, deposit
             )));
         } else if (accountType.equalsIgnoreCase("Premium")){
-            accounts.put(generateId, new PremiumAccount(new AccountData(
-                    generateId, name, email, deposit
+            accounts.put(newId, new PremiumAccount(new AccountData(
+                    newId, name, email, deposit
             )));
         } else if(accountType.equalsIgnoreCase("Savings")){
-            accounts.put(generateId, new SavingAccount(new AccountData(
-                    generateId, name, email, deposit
+            accounts.put(newId, new SavingAccount(new AccountData(
+                    newId, name, email, deposit
             )));
         } else {
-            accounts.put(generateId, new HavakAccount(new AccountData(
-                    generateId, name, email, deposit
+            accounts.put(newId, new HavakAccount(new AccountData(
+                    newId, name, email, deposit
             )));
         }
     }

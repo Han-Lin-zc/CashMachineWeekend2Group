@@ -88,12 +88,24 @@ public class CashMachineApp extends Application {
         field.setMaxWidth(150.0);
         field.setPromptText("Please enter your ID");
 
+        //Error Message
+        Text errorInfo = new Text();
+        errorInfo.setFont(Font.font("Helvatica", 12));
+        errorInfo.setFill(Color.RED);
+
         Button btnSubmit = new Button("Log in");
         btnSubmit.setOnAction(e -> {
-            int id = Integer.parseInt(field.getText());
-            cashMachine.login(id);
-
-            this.stage.setScene(new Scene(createContent()));
+            if(field.getText().isEmpty()){
+                errorInfo.setText("ERROR: Please enter a valid ID or create an account!");
+            } else if(!numberOrNot(field.getText())){
+                errorInfo.setText("ERROR: Please enter an actual number!");
+            } else if(cashMachine.getBank().checkId(Integer.parseInt(field.getText()))){
+                errorInfo.setText("ERROR: Please enter a valid ID!");
+            }  else {
+                int id = Integer.parseInt(field.getText());
+                cashMachine.login(id);
+                this.stage.setScene(new Scene(createContent()));
+            }
         });
 
         Button btnCreate = new Button("Create new account");
@@ -108,8 +120,9 @@ public class CashMachineApp extends Application {
         btnSubmit.setTranslateY(-26);
         btnCreate.setTranslateY(2);
         title.setTranslateY(-100);
+        errorInfo.setTranslateY(25);
 
-        root.getChildren().addAll(field, btnSubmit,btnCreate,title);
+        root.getChildren().addAll(field, btnSubmit,btnCreate,title,errorInfo);
 
         return root;
     }
@@ -121,8 +134,6 @@ public class CashMachineApp extends Application {
         title.setText("Create Account");
         title.setFont(Font.font("Helvatica", 20));
         title.setTextAlignment(TextAlignment.CENTER);
-
-
 
         nameField.clear();
         nameField.setMaxWidth(155.0);
@@ -145,23 +156,20 @@ public class CashMachineApp extends Application {
 
         comboBox.setMaxWidth(155.0);
 
-
         //Error Message
         Text errorInfo = new Text();
-
         errorInfo.setFont(Font.font("Helvatica", 12));
         errorInfo.setFill(Color.RED);
 
 
-
-
-//SUBMIT NEW ACCOUNT
+        //SUBMIT NEW ACCOUNT
         Button btnSubmit = new Button("Submit");
         btnSubmit.setOnAction(e -> {
             int deposit = 0;
-            if(depositField.getText().isEmpty()){
+            String text = depositField.getText();
+            if(depositField.getText().isEmpty() || text == ""){
                 errorInfo.setText("ERROR: Please enter a number to deposit!");
-            } else if(!numberOrNot()){
+            } else if(!numberOrNot(depositField.getText())){
                 errorInfo.setText("ERROR: Please enter an actual number!");
             } else { deposit = Integer.parseInt(depositField.getText());
             }
@@ -179,16 +187,17 @@ public class CashMachineApp extends Application {
             } else if (accountType == null || accountType == ""){
                 errorInfo.setText("ERROR: Please select an account type!");
             }  else {
-                cashMachine.getBank().addAccount(name,email,deposit,accountType);
+                int id = cashMachine.getBank().getNewId();
+                cashMachine.getBank().addAccount(name,email,deposit,accountType,id);
                 depositField.clear();
                 nameField.clear();
                 emailField.clear();
-                errorInfo.setText("");
+                errorInfo.setText("Your account "+ id);
             }
         });
 
 
-//Styling for buttons
+        //Styling for buttons
         title.setTranslateY(-100);
         nameField.setTranslateY(-65);
         emailField.setTranslateY(-35);
@@ -197,17 +206,17 @@ public class CashMachineApp extends Application {
         btnSubmit.setTranslateY(55);
         errorInfo.setTranslateY(80);
 
-
+        //Grab all nodes and add them to StackPane
         root.getChildren().addAll(nameField,emailField,depositField,title,btnSubmit,comboBox,errorInfo);
 
         return root;
     }
 
-    boolean numberOrNot()
+    boolean numberOrNot(String checkNum)
     {
         try
         {
-            Integer.parseInt(depositField.getText());
+            Integer.parseInt(checkNum);
         }
         catch(NumberFormatException ex)
         {
