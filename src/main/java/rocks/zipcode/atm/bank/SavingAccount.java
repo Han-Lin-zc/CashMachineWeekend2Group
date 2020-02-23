@@ -19,5 +19,4 @@ public class SavingAccount extends Account {
         deposit(calculateAnnualInterestRate());
 
     }
-
 }
