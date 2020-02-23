@@ -201,7 +201,9 @@ public class CashMachineApp extends Application {
                 depositField.clear();
                 nameField.clear();
                 emailField.clear();
-                errorInfo.setText("Your account "+ id);
+                errorInfo.setText("Your account "+ id + "! \n" +
+                                    "If you lose it your ID, please call call: \n" +
+                                    "302 - 256 -5203!");
             }
         });
 
@@ -213,7 +215,7 @@ public class CashMachineApp extends Application {
         depositField.setTranslateY(-5);
         comboBox.setTranslateY(25);
         btnSubmit.setTranslateY(55);
-        errorInfo.setTranslateY(80);
+        errorInfo.setTranslateY(90);
 
         //Grab all nodes and add them to StackPane
         root.getChildren().addAll(nameField,emailField,depositField,title,btnSubmit,comboBox,errorInfo);

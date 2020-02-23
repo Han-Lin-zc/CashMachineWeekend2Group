@@ -5,6 +5,7 @@ import rocks.zipcode.atm.ActionResult;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author ZipCodeWilmington
@@ -65,7 +66,11 @@ public class Bank {
     }
 
     public int getNewId() {
-        return accounts.size()+1000;
+        int newRandomId = ThreadLocalRandom.current().nextInt(1000, 5001);
+        while(!checkId(newRandomId)){
+            newRandomId = ThreadLocalRandom.current().nextInt(1000, 5001);
+        }
+        return newRandomId;
     }
 
     public boolean checkId(int idToCheck){
