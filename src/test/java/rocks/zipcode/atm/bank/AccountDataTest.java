@@ -41,5 +41,10 @@ public class AccountDataTest {
 
     @Test
     public void testToString() {
+        AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500);
+        String name = accData.getName();
+        float balance = accData.getBalance();
+        String expected = name + ", Havak Inc. Welcomes You! :D" + '\n' + '\n' + '\n' + "Balance: " + balance;
+        Assert.assertEquals(expected, accData.toString());
     }
 }
