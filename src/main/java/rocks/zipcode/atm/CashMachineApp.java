@@ -38,9 +38,7 @@ public class CashMachineApp extends Application {
         VBox vbox = new VBox(10);
         vbox.setPrefSize(600, 600);
 
-
-
-        TextArea areaInfo = new TextArea();
+        Text areaInfo = new Text();
         TextField cashInput = new TextField();
         cashInput.setMaxWidth(150.0);
         cashInput.setPromptText("Enter amount");
