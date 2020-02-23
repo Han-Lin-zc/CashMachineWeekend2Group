@@ -4,6 +4,7 @@ import rocks.zipcode.atm.ActionResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author ZipCodeWilmington
@@ -60,6 +61,42 @@ public class Bank {
             return ActionResult.success(account.getAccountData());
         } else {
             return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
+        }
+    }
+
+    public int getNewId() {
+        return accounts.size()+1000;
+    }
+
+    public boolean checkId(int idToCheck){
+        for (int key : accounts.keySet()) {
+            if(key == idToCheck){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public void addAccount(String name, String email, int deposit, String accountType,int newId){
+//Need to create logic to check for duplicate IDs
+
+        if(accountType.equalsIgnoreCase("Basic")){
+            accounts.put(newId, new BasicAccount(new AccountData(
+                    newId, name, email, deposit
+            )));
+        } else if (accountType.equalsIgnoreCase("Premium")){
+            accounts.put(newId, new PremiumAccount(new AccountData(
+                    newId, name, email, deposit
+            )));
+        } else if(accountType.equalsIgnoreCase("Savings")){
+            accounts.put(newId, new SavingAccount(new AccountData(
+                    newId, name, email, deposit
+            )));
+        } else {
+            accounts.put(newId, new HavakAccount(new AccountData(
+                    newId, name, email, deposit
+            )));
         }
     }
 }
