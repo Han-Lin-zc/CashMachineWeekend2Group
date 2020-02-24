@@ -16,18 +16,6 @@ public class AccountTest {
     }
 
     @Test
-    public void deposit() {
-    }
-
-    @Test
-    public void withdraw() {
-    }
-
-    @Test
-    public void canWithdraw() {
-    }
-
-    @Test
     public void getBalance() {
         AccountData test = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         float expected = 500.00f;
