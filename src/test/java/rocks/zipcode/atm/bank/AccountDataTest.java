@@ -47,7 +47,7 @@ public class AccountDataTest {
         String balance = String.format("%1$.2f", accData.getBalance());
         String expected = name + ", Havak Inc. Welcomes you! \n\n" +
                 "As a prime member of our " + accountType + " account,\n" +
-                "we wish you have wonderful day!" + '\n' + '\n' + "Balance: " + balance;
+                "we wish you have a wonderful day!" + '\n' + '\n' + "Balance: " + balance;
         Assert.assertEquals(expected, accData.toString());
     }
 }
