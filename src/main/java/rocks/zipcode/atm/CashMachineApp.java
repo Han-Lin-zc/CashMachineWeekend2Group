@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import rocks.zipcode.atm.bank.AccountData;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URL;
 
 /**
  * @author ZipCodeWilmington
@@ -91,21 +93,26 @@ public class CashMachineApp extends Application {
         StackPane root = new StackPane();
         Text title = new Text();
         title.setText("Havak Bank");
-        title.setFont(Font.font("Helvatica", 20));
+        title.setFont(Font.font("Helvatica", FontWeight.BOLD, 20));
         title.setTextAlignment(TextAlignment.CENTER);
+        title.setFill(Color.WHITE);
         field.clear();
         field.setMaxWidth(150.0);
         field.setPromptText("Please enter your ID");
+        root.setStyle("-fx-background-image: url(\"File:background.jpg\");");
+
+//then you set to your node
 
         //Error Message
         Text errorInfo = new Text();
         errorInfo.setFont(Font.font("Helvatica", 12));
-        errorInfo.setFill(Color.RED);
+        errorInfo.setFill(Color.WHITE);
+        errorInfo.setTextAlignment(TextAlignment.CENTER);
 
         Button btnSubmit = new Button("Log in");
         btnSubmit.setOnAction(e -> {
             if(field.getText().isEmpty()){
-                errorInfo.setText("ERROR: Please enter a valid ID or create an account!");
+                errorInfo.setText("ERROR: Please enter a valid ID \nOr create an account today!");
             } else if(!numberOrNot(field.getText())){
                 errorInfo.setText("ERROR: Please enter an actual number!");
             } else if(cashMachine.getBank().checkId(Integer.parseInt(field.getText()))){
@@ -129,7 +136,7 @@ public class CashMachineApp extends Application {
         btnSubmit.setTranslateY(-26);
         btnCreate.setTranslateY(2);
         title.setTranslateY(-100);
-        errorInfo.setTranslateY(25);
+        errorInfo.setTranslateY(35);
 
         root.getChildren().addAll(field, btnSubmit,btnCreate,title,errorInfo);
 
@@ -143,6 +150,10 @@ public class CashMachineApp extends Application {
         title.setText("Create Account");
         title.setFont(Font.font("Helvatica", 20));
         title.setTextAlignment(TextAlignment.CENTER);
+
+
+        root.setStyle("-fx-background-image: url(\"File:background.jpg\");");
+        title.setFill(Color.WHITE);
 
         nameField.clear();
         nameField.setMaxWidth(155.0);
@@ -168,7 +179,7 @@ public class CashMachineApp extends Application {
         //Error Message
         Text errorInfo = new Text();
         errorInfo.setFont(Font.font("Helvatica", 12));
-        errorInfo.setFill(Color.RED);
+        errorInfo.setFill(Color.WHITE);
         errorInfo.setTextAlignment(TextAlignment.CENTER);
 
 
