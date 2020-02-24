@@ -169,6 +169,7 @@ public class CashMachineApp extends Application {
         Text errorInfo = new Text();
         errorInfo.setFont(Font.font("Helvatica", 12));
         errorInfo.setFill(Color.RED);
+        errorInfo.setTextAlignment(TextAlignment.CENTER);
 
 
         //SUBMIT NEW ACCOUNT
@@ -201,8 +202,8 @@ public class CashMachineApp extends Application {
                 depositField.clear();
                 nameField.clear();
                 emailField.clear();
-                errorInfo.setText("Your account "+ id + "! \n" +
-                                    "If you lose it your account ID, please call: \n" +
+                errorInfo.setText("Your account ID is "+ id + "! \n" +
+                                    "If you lose your account ID, please call: \n" +
                                     "302 - 256 -5203!");
             }
         });
@@ -215,7 +216,7 @@ public class CashMachineApp extends Application {
         depositField.setTranslateY(-5);
         comboBox.setTranslateY(25);
         btnSubmit.setTranslateY(55);
-        errorInfo.setTranslateY(90);
+        errorInfo.setTranslateY(95);
 
         //Grab all nodes and add them to StackPane
         root.getChildren().addAll(nameField,emailField,depositField,title,btnSubmit,comboBox,errorInfo);
