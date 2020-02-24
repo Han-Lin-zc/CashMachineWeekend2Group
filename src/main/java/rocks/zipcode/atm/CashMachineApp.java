@@ -37,8 +37,8 @@ public class CashMachineApp extends Application {
     Stage accntStage = new Stage();
 
     private Parent createContent() {
-        VBox vbox = new VBox(15);
-        vbox.setPrefSize(300, 300);
+        VBox vbox = new VBox(20);
+        vbox.setPrefSize(500, 375);
         Text areaInfo = new Text();
         areaInfo.setFont(Font.font("Helvatica", 23));
         areaInfo.setFill(Color.WHITE);
@@ -47,7 +47,7 @@ public class CashMachineApp extends Application {
         cashInput.setPromptText("Enter amount");
         Text errorInfo = new Text();
         errorInfo.setFont(Font.font("Helvatica", 12));
-        errorInfo.setFill(Color.RED);
+        errorInfo.setFill(Color.WHITE);
         vbox.setStyle("-fx-background-image: url(\"File:background.jpg\");");
 
         areaInfo.setText(cashMachine.toString());
@@ -83,6 +83,15 @@ public class CashMachineApp extends Application {
 
         FlowPane flowpane = new FlowPane();
 
+        areaInfo.setTranslateX(50);
+        cashInput.setTranslateX(50);
+        flowpane.setTranslateX(50);
+        errorInfo.setTranslateX(50);
+
+        areaInfo.setTranslateY(50);
+        cashInput.setTranslateY(50);
+        flowpane.setTranslateY(50);
+        errorInfo.setTranslateY(50);
 
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
