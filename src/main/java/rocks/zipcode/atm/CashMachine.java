@@ -13,6 +13,7 @@ public class CashMachine {
 
     private final Bank bank;
     private AccountData accountData = null;
+    private String errorMessage = "";
 
     public CashMachine(Bank bank) {
         this.bank = bank;
@@ -29,7 +30,8 @@ public class CashMachine {
         );
     }
 
-    public void deposit(int amount) {
+    //float
+    public void deposit(float amount) {
         if (accountData != null) {
             tryCall(
                     () -> bank.deposit(accountData, amount),
@@ -37,7 +39,7 @@ public class CashMachine {
             );
         }
     }
-
+    //float
     public void withdraw(int amount) {
         if (accountData != null) {
             tryCall(
@@ -53,6 +55,14 @@ public class CashMachine {
         }
     }
 
+    public Bank getBank() {
+        return bank;
+    }
+
+    public String getErrorMessage(){
+        return this.errorMessage;
+    }
+
     @Override
     public String toString() {
         return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
@@ -60,6 +70,7 @@ public class CashMachine {
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
         try {
+            this.errorMessage = "";
             ActionResult<T> result = action.get();
             if (result.isSuccess()) {
                 T data = result.getData();
@@ -69,7 +80,11 @@ public class CashMachine {
                 throw new RuntimeException(errorMessage);
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            this.errorMessage = "ERROR: " + e.getMessage();
         }
+    }
+
+    public AccountData getAccountData(){
+        return this.accountData;
     }
 }

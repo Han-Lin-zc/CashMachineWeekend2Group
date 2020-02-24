@@ -5,20 +5,27 @@ package rocks.zipcode.atm.bank;
  */
 public abstract class Account {
 
+    //fields
     private AccountData accountData;
 
+    //constructor
     public Account(AccountData accountData) {
         this.accountData = accountData;
     }
 
+    //methods here and below
     public AccountData getAccountData() {
         return accountData;
     }
 
-    public void deposit(int amount) {
+    //takes in a float for parameter
+    public void deposit(float amount) {
         updateBalance(getBalance() + amount);
-    }
 
+        }
+
+
+    // cannot withdraw float
     public boolean withdraw(int amount) {
         if (canWithdraw(amount)) {
             updateBalance(getBalance() - amount);
@@ -28,16 +35,18 @@ public abstract class Account {
         }
     }
 
+    // should not be able to withdraw floats
     protected boolean canWithdraw(int amount) {
         return getBalance() >= amount;
     }
 
-    public int getBalance() {
+    public float getBalance() {
         return accountData.getBalance();
     }
 
-    private void updateBalance(int newBalance) {
+    //float
+    private void updateBalance(float newBalance) {
         accountData = new AccountData(accountData.getId(), accountData.getName(), accountData.getEmail(),
-                newBalance);
+                newBalance, accountData.getTypeAccount());
     }
 }
