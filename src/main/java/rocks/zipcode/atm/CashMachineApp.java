@@ -38,14 +38,17 @@ public class CashMachineApp extends Application {
 
     private Parent createContent() {
         VBox vbox = new VBox(15);
-        vbox.setPrefSize(600, 600);
+        vbox.setPrefSize(300, 300);
         Text areaInfo = new Text();
+        areaInfo.setFont(Font.font("Helvatica", 23));
+        areaInfo.setFill(Color.WHITE);
         TextField cashInput = new TextField();
         cashInput.setMaxWidth(200);
         cashInput.setPromptText("Enter amount");
         Text errorInfo = new Text();
         errorInfo.setFont(Font.font("Helvatica", 12));
         errorInfo.setFill(Color.RED);
+        vbox.setStyle("-fx-background-image: url(\"File:background.jpg\");");
 
         areaInfo.setText(cashMachine.toString());
 
