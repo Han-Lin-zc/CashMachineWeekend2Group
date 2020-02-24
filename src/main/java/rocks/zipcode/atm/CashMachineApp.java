@@ -202,7 +202,7 @@ public class CashMachineApp extends Application {
                 nameField.clear();
                 emailField.clear();
                 errorInfo.setText("Your account "+ id + "! \n" +
-                                    "If you lose it your ID, please call call: \n" +
+                                    "If you lose it your account ID, please call: \n" +
                                     "302 - 256 -5203!");
             }
         });
