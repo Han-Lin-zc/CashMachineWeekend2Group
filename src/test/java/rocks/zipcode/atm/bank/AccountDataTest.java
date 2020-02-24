@@ -34,17 +34,20 @@ public class AccountDataTest {
     @Test
     public void getBalance() {
         AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
-        float expected = 500;
+        float expected = 500.00f;
         float actual = accData.getBalance();
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected,actual, 0.0);
     }
 
     @Test
     public void testToString() {
         AccountData accData = new AccountData(1000, "Basic", "basic@gmail.com", 500, "basic");
         String name = accData.getName();
-        float balance = accData.getBalance();
-        String expected = name + ", Havak Inc. Welcomes You! :D" + '\n' + '\n' + '\n' + "Balance: " + balance;
+        String accountType = accData.getTypeAccount();
+        String balance = String.format("%1$.2f", accData.getBalance());
+        String expected = name + ", Havak Inc. Welcomes you! \n\n" +
+                "As a prime member of our " + accountType + " account,\n" +
+                "we wish you have wonderful day!" + '\n' + '\n' + "Balance: " + balance;
         Assert.assertEquals(expected, accData.toString());
     }
 }
