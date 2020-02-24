@@ -44,7 +44,7 @@ public final class AccountData {
     public String toString() {
         String welcomeMessage = name + ", Havak Inc. Welcomes you! \n\n" +
                 "As a prime member of our " + getTypeAccount() + " account,\n" +
-                "we wish you have wonderful day!";
+                "we wish you have a wonderful day!";
         String stringBalance = String.format("%1$.2f", balance);
         return welcomeMessage + '\n' +'\n' +
                 "Balance: " + stringBalance;
